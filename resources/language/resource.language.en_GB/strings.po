@@ -1,0 +1,153 @@
+# Kodi Media Center language file
+# Addon Name: Astro
+# Addon id: script.astro
+# Addon Provider: Someone Like You
+msgid ""
+msgstr ""
+"Project-Id-Version: XBMC-Addons\n"
+"Report-Msgid-Bugs-To: Someone Like You\n"
+"POT-Creation-Date: 2022-07-30 02:50+0000\n"
+"PO-Revision-Date: 2022-07-30 02:50+0000\n"
+"Last-Translator: Someone Like You\n"
+"Language-Team: Someone Like You\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_GB\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+# Settings
+
+msgctxt "#32000"
+msgid "Settings"
+msgstr ""
+
+msgctxt "#32001"
+msgid "Developer Mode"
+msgstr ""
+
+msgctxt "#32002"
+msgid "Developer Options"
+msgstr ""
+
+msgctxt "#32003"
+msgid "General Options"
+msgstr ""
+
+msgctxt "#32004"
+msgid "Differentiate folders from actions in window view"
+msgstr ""
+
+msgctxt "#32012"
+msgid "Astro Remote Settings"
+msgstr ""
+
+msgctxt "#32013"
+msgid "Astro Remote URL"
+msgstr ""
+
+msgctxt "#32017"
+msgid "Open customization menu"
+msgstr ""
+
+# Window
+
+msgctxt "#32005"
+msgid "[B]Create Astro Section[/B]"
+msgstr ""
+
+msgctxt "#32006"
+msgid "[COLOR orange]..[/COLOR]"
+msgstr ""
+
+# Window Developer
+
+msgctxt "#32007"
+msgid "Convert Local Astro Config to Remote"
+msgstr ""
+
+msgctxt "#32010"
+msgid "Upload Astro Config to Pastebin"
+msgstr ""
+
+msgctxt "#32011"
+msgid "Insert Remote Astro Config"
+msgstr ""
+
+msgctxt "#32012"
+msgid "Insert Remote Astro URL"
+msgstr ""
+
+msgctxt "#32029"
+msgid "The Astro link remote is not well formatted"
+msgstr ""
+
+msgctxt "#32014"
+msgid "Unable to retrieve url information"
+msgstr ""
+
+msgctxt "#32015"
+msgid "Are you sure you want to override Astro with remote config?, There are %s folders and %s actions"
+msgstr ""
+
+msgctxt "#32016"
+msgid "Convert Super Favourites to Astro"
+msgstr ""
+
+msgctxt "#32027"
+msgid "Insert a password to edit your Astro Remote Config"
+msgstr ""
+
+msgctxt "#32028"
+msgid "Astro Remote Config Admin Password"
+msgstr ""
+
+#  Addon
+
+msgctxt "#32008"
+msgid "Rename Folder"
+msgstr ""
+
+msgctxt "#32009"
+msgid "Rename Action"
+msgstr ""
+
+#  Customize Window
+
+msgctxt "#32018"
+msgid "The color %s has been setted to default"
+msgstr ""
+
+#  FirstRun Window
+
+msgctxt "#32019"
+msgid "Welcome to Astro!!!"
+msgstr ""
+
+msgctxt "#32020"
+msgid "Astro is a script to keep your favorite sections of your favorite add-ons in only one place"
+msgstr ""
+
+msgctxt "#32021"
+msgid "Morever, Astro allows to share your config and save it in the cloud!"
+msgstr ""
+
+msgctxt "#32022"
+msgid "So the changes made by the admins, will be automatically updated on your device"
+msgstr ""
+
+msgctxt "#32023"
+msgid "Astro - Welcome to the new age"
+msgstr ""
+
+msgctxt "#32024"
+msgid "Astro - A world of possibilities"
+msgstr ""
+
+msgctxt "#32025"
+msgid "Continue"
+msgstr ""
+
+msgctxt "#32026"
+msgid "Close"
+msgstr ""

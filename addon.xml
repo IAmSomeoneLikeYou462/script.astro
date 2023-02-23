@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="script.astro"
+	name="Astro"
+	version="1.0.0"
+	provider-name="Someone Like You">
+	<requires></requires>
+	<extension point="xbmc.python.pluginsource" library="resources/lib/default.py">
+		<provides>executable</provides>
+	</extension>
+	<extension point="xbmc.service" library="resources/lib/service.py" start="startup" />
+	<extension point="kodi.context.item">
+		<menu id="kodi.core.main">
+			<item library="resources/lib/library.py">
+				<label>Script Astro</label>
+				<visible>Container.Content(tvshows)|Container.Content(movies)|Container.Content(musicvideos)|!IsEmpty(ListItem.Genre)</visible>
+			</item>
+		</menu>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary>A world of possibilities.</summary>
+		<description>A world of possibilities.</description>
+		<disclaimer>A world of possibilities.</disclaimer>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon>

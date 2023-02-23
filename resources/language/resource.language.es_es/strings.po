@@ -1,0 +1,148 @@
+# Kodi Media Center language file
+# Addon Name: Astro
+# Addon id: script.astro
+# Addon Provider: Someone Like You
+msgid ""
+msgstr ""
+"Project-Id-Version: XBMC-Addons\n"
+"Report-Msgid-Bugs-To: Someone Like You\n"
+"POT-Creation-Date: 2022-07-30 02:50+0000\n"
+"PO-Revision-Date: 2022-07-30 02:50+0000\n"
+"Last-Translator: Someone Like You\n"
+"Language-Team: Someone Like You\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es_es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+# Settings
+
+msgctxt "#32000"
+msgid "Settings"
+msgstr "Ajustes"
+
+msgctxt "#32001"
+msgid "Developer Mode"
+msgstr "Modo Desarrollador"
+
+msgctxt "#32002"
+msgid "Developer Options"
+msgstr "Opciones para Desarrolladores"
+
+msgctxt "#32003"
+msgid "General Options"
+msgstr "Opciones Generales"
+
+msgctxt "#32004"
+msgid "Differentiate folders from actions in window view"
+msgstr "Diferenciar las carpetas de las acciones en la vista ventana"
+
+msgctxt "#32012"
+msgid "Astro Remote Settings"
+msgstr "Astro Ajustes Remoto"
+
+msgctxt "#32017"
+msgid "Open customization menu"
+msgstr "Abrir menú de personalización"
+
+
+# Window
+
+msgctxt "#32005"
+msgid "[B]Create Astro Section[/B]"
+msgstr "[B]Crear Sección en Astro[/B]"
+
+# 32006 has not translation
+
+#  Window Developer
+
+msgctxt "#32007"
+msgid "Convert Local Astro Config to Remote"
+msgstr "Convertir Configuración Local de Astro a Remota"
+
+msgctxt "#32010"
+msgid "Upload Astro Config to Pastebin"
+msgstr "Cargar Configuración de Astro a Pastebin"
+
+msgctxt "#32011"
+msgid "Insert Remote Astro Config"
+msgstr "Insertar Configuración Remota de Astro"
+
+msgctxt "#32012"
+msgid "Insert Remote Astro URL"
+msgstr "Introduce Astro URL Remota"
+
+msgctxt "#32013"
+msgid "The Astro link remote is not well formatted"
+msgstr "El link Astro remoto no está bien formateado"
+
+msgctxt "#32014"
+msgid "No se ha podido recuperar la información del url"
+msgstr ""
+
+msgctxt "#32015"
+msgid "Are you sure you want to override Astro with remote config?, There are %s folders and %s actions"
+msgstr "Estás seguro de querer sobrescribir Astro con la configuración remota?, Hay %s carpetas y %s acciones"
+
+msgctxt "#32016"
+msgid "Convert Super Favourites to Astro"
+msgstr "Convertir Super Favoritos a Astro Config"
+
+msgctxt "#32027"
+msgid "Insert a password to edit your Astro Remote Config"
+msgstr "Introduce una contraseña para editar tu configuración remota de Astro"
+
+
+
+#  Addon
+
+msgctxt "#32008"
+msgid "Rename Folder"
+msgstr "Renombrar carpeta"
+
+msgctxt "#32009"
+msgid "Rename Action"
+msgstr "Renombrar Acción"
+
+#  Customize Window
+
+msgctxt "#32018"
+msgid "The color %s has been setted to default"
+msgstr "El color %s se ha configurado como predeterminado"
+
+#  FirstRun Window
+
+msgctxt "#32019"
+msgid "Welcome to Astro!!!"
+msgstr ""
+
+msgctxt "#32020"
+msgid "Astro is a script to keep your favorite sections of your favorite add-ons in only one place"
+msgstr "Astro es un script para guardar tus secciones favoritos de tus add-ons favoritos en un solo lugar!"
+
+msgctxt "#32021"
+msgid "Morever, Astro allows to share your config and save it in the cloud!"
+msgstr "Además permite compartir tu configuración y guardarla en la nube!"
+
+msgctxt "#32022"
+msgid "So the changes made by the admins, will be automatically updated on your device"
+msgstr "Por lo que los cambios que hagan los administradores, se te actualizarán automáticamente en tu dispositivo!"
+
+msgctxt "#32023"
+msgid "Astro - Welcome to the new age"
+msgstr "Astro - Bienvenido a una nueva era"
+
+msgctxt "#32024"
+msgid "Astro - A world of possibilities"
+msgstr "Astro - Un mundo de posibilidades"
+
+msgctxt "#32025"
+msgid "Continue"
+msgstr "Continuar"
+
+msgctxt "#32026"
+msgid "Close"
+msgstr "Cerrar"
+
+

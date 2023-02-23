@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings version="1">
+	<section id="script.astro">
+		<category id="settings" label="32000" help="">
+			<group id="1" label="32002">
+				<setting id="dev_mode" type="boolean" label="32001" help="">
+					<level>0</level>
+					<default>false</default>
+					<control type="toggle"/>
+				</setting>
+			</group>
+			<group id="2" label="32003">
+				<setting id="differentiate_elements_window" type="boolean" label="32004" help="">
+					<level>0</level>
+					<default>true</default>
+					<control type="toggle"/>
+				</setting>
+				<setting id="run_customize_modal" type="action" label="32017" help="">
+					<level>1</level>
+					<data>RunPlugin(plugin://script.astro/?eyJhY3Rpb24iOiAicnVuX2N1c3RvbWl6ZV9tb2RhbCJ9)</data>
+					<control type="button" format="action">
+						<close>true</close>
+					</control>
+					<dependencies>
+						<dependency type="visible" setting="differentiate_elements_window">true</dependency>
+						<dependency type="enable">
+							<and>
+								<condition setting="differentiate_elements_window">true</condition>
+							</and>
+						</dependency>
+					</dependencies>
+				</setting>
+				<setting id="color_customize" type="string" label="32017" help="">
+					<level>0</level>
+					<default>orange</default>
+					<visible>false</visible>
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<control type="edit" format="string">
+						<heading>32017</heading>
+					</control>
+				</setting>
+			</group>
+			<group id="3" label="32012">
+				<visible>false</visible>
+				<setting id="astro_remote_url" type="string" label="32013" help="">
+					<level>0</level>
+					<default/>
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<control type="edit" format="string">
+						<heading>32013</heading>
+					</control>
+				</setting>
+			</group>
+		</category>
+	</section>
+</settings>
