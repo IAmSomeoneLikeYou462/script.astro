@@ -6,13 +6,57 @@
 """Classes for defining the appearance of PyXBMCt Windows and Controls"""
 
 from __future__ import unicode_literals
-import os
+import os, sys
 from abc import ABCMeta, abstractmethod
-from six import with_metaclass
 import xbmc
 from xbmcaddon import Addon
 
 
+def resolve_bases(bases):
+    # Copyright (c) 2010-2020 Benjamin Peterson
+    """Resolve MRO entries dynamically as specified by PEP 560."""
+    new_bases = list(bases)
+    updated = False
+    shift = 0
+    for i, base in enumerate(bases):
+        if isinstance(base, type):
+            continue
+        if not hasattr(base, "__mro_entries__"):
+            continue
+        new_base = base.__mro_entries__(bases)
+        updated = True
+        if not isinstance(new_base, tuple):
+            raise TypeError("__mro_entries__ must return a tuple")
+        else:
+            new_bases[i+shift:i+shift+1] = new_base
+            shift += len(new_base) - 1
+    if not updated:
+        return bases
+    return tuple(new_bases)
+
+def with_metaclass(meta, *bases):
+    # Copyright (c) 2010-2020 Benjamin Peterson
+    """Create a base class with a metaclass."""
+    # This requires a bit of explanation: the basic idea is to make a dummy
+    # metaclass for one level of class instantiation that replaces itself with
+    # the actual metaclass.
+    class metaclass(type):
+
+        def __new__(cls, name, this_bases, d):
+            if sys.version_info[:2] >= (3, 7):
+                # This version introduced PEP 560 that requires a bit
+                # of extra care (we mimic what is done by __build_class__).
+                resolved_bases = resolve_bases(bases)
+                if resolved_bases is not bases:
+                    d['__orig_bases__'] = bases
+            else:
+                resolved_bases = bases
+            return meta(name, resolved_bases, d)
+
+        @classmethod
+        def __prepare__(cls, name, this_bases):
+            return meta.__prepare__(name, bases)
+    return type.__new__(metaclass, 'temporary_class', (), {})
 class BaseSkin(with_metaclass(ABCMeta, object)):
     """
     Abstract class for creating fully customized skins
