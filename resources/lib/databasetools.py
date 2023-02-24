@@ -20,10 +20,7 @@
 # ----------------------------------------------------------------------
 
 import sqlite3
-try:
-    from tools import *
-except:
-    from tools import *
+from tools import *
 
 
 def checkFileExists(): return os.path.isfile(DBFILE)
