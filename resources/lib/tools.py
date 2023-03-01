@@ -110,26 +110,35 @@ def itemlist_refresh():
 
 def set_context_commands(item):
     """    Función para generar los menus contextuales.    """
+    CONTEXT_COMMANDS = {'folders': {'[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32008)): 'renameSQL',
+                                    '[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32030)): 'deleteSQL',
+                                    '[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32032)): 'moveElement'},
+                        'actions': {'[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32009)): 'renameSQL',
+                                    '[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32031)): 'deleteSQL',
+                                    '[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32033)): 'moveElement'},}
     context_commands = []
     # Rename Folder
     if item.path is None or not item.path:
-        context_commands.append(('[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32008)),
-                                 create_RunPlugin(
-                                     item.clone(
-                                         action='renameSQL',
-                                         id=item.id,
-                                         columnName='name',
-                                         sqlTable='astro_folders'
-                                     ))))
+        for name, action in CONTEXT_COMMANDS['folders'].items():
+            context_commands.append((name,
+                                    create_RunPlugin(
+                                        item.clone(
+                                            action=action,
+                                            id=item.id,
+                                            columnName='name',
+                                            sqlTable='astro_folders'
+                                        ))))
+        
     else:
-        context_commands.append(('[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32009)),
-                                 create_RunPlugin(
-                                     item.clone(
-                                         action='renameSQL',
-                                         id=item.id,
-                                         columnName='label',
-                                         sqlTable='astro_actions'
-                                     ))))
+        for name, action in CONTEXT_COMMANDS['actions'].items():
+            context_commands.append((name,
+                                    create_RunPlugin(
+                                        item.clone(
+                                            action=action,
+                                            id=item.id,
+                                            columnName='label',
+                                            sqlTable='astro_actions'
+                                        ))))
     return context_commands
 
 

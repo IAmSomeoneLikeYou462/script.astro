@@ -105,6 +105,31 @@ msgctxt "#32009"
 msgid "Rename Action"
 msgstr "Renombrar Acción"
 
+msgctxt "#32030"
+msgid "Delete Folder"
+msgstr "Eliminar Carpeta"
+
+msgctxt "#32034"
+msgid "Are you sure you want to delete %s folder?"
+msgstr "Estás seguro que quieres eliminar la carpeta: %s"
+
+msgctxt "#32031"
+msgid "Delete Action"
+msgstr "Eliminar Acción"
+
+msgctxt "#32035"
+msgid "Are you sure you want to delete %s action?"
+msgstr "Estás seguro que quieres eliminar la acción: %s"
+
+msgctxt "#32032"
+msgid "Move Folder"
+msgstr "Mover Carpeta"
+
+msgctxt "#32033"
+msgid "Move Action"
+msgstr "Mover Acción"
+
+
 #  Customize Window
 
 msgctxt "#32018"

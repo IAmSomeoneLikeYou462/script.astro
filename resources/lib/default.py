@@ -89,12 +89,34 @@ def runPlugin(item):
     xbmc.executebuiltin(
         'ActivateWindow(10025, "%s")' % (item.path))
 
+def moveElement(item):
+    foldersSQL = databasetools.executeSQL('SELECT id, sectionID, name FROM astro_folders')
+    folderNames = [folder[2] for folder in foldersSQL]
+    newFolderId = xbmcgui.Dialog().select(TITLE, folderNames)
+    if newFolderId != -1:
+        columnName = 'subFolderId' if item.sqlTable == 'astro_folders' else 'keepFolderId'
+        sqlSeq = "UPDATE {} SET {} = '{}' WHERE id = {};".format(
+                item.sqlTable, columnName, foldersSQL[newFolderId][1], item.id)
+        databasetools.commitSQL(sqlSeq)
+    itemlist_refresh()
+
 
 def renameSQL(item):
     name = xbmcgui.Dialog().input(TITLE, item.title, xbmcgui.INPUT_ALPHANUM)
-    sqlSeq = "UPDATE {} SET {} = '{}' WHERE id = {};".format(
-        item.sqlTable, item.columnName, name, item.id)
-    databasetools.commitSQL(sqlSeq)
+    if name:
+        sqlSeq = "UPDATE {} SET {} = '{}' WHERE id = {};".format(
+            item.sqlTable, item.columnName, name, item.id)
+        databasetools.commitSQL(sqlSeq)
+    itemlist_refresh()
+
+
+def deleteSQL(item):
+    localizedString = 32034 if item.sqlTable == 'astro_folders' else 32035
+    name = xbmcgui.Dialog().yesno(TITLE, getLocalizedString(localizedString) % item.title)
+    if name:
+        sqlSeq = "DELETE FROM {} WHERE id = {};".format(
+            item.sqlTable, item.id)
+        databasetools.commitSQL(sqlSeq)
     itemlist_refresh()
 
 

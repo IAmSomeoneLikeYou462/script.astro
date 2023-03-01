@@ -113,13 +113,13 @@ class LibraryModal(pyxbmct.AddonDialogWindow):
             sections.append([0, 0, getLocalizedString(32006), 'ICON', True])
         sections.append(
             [0, sectionId, getLocalizedString(32005), 'ICON', True])
+        for folder in databasetools.executeSQL(
+                'SELECT * FROM astro_folders WHERE subFolderId == {}'.format(sectionId)):
+            sections.append(list(folder))
         for action in databasetools.executeSQL(
                 'SELECT * FROM astro_actions WHERE keepFolderId == {}'.format(sectionId)):
             action = self.prepareItemAction(action)
             sections.append(list(action))
-        for folder in databasetools.executeSQL(
-                'SELECT * FROM astro_folders WHERE subFolderId == {}'.format(sectionId)):
-            sections.append(list(folder))
         self.items = sections
         self.list.addItems(list(sec[2]
                                 for sec in sections))
