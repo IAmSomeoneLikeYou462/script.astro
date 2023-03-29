@@ -61,8 +61,11 @@ class LibraryModal(pyxbmct.AddonDialogWindow):
         self.connect(self.closeButton, self.close)
 
     def addSection(self):
+        global params
         if not params or len(params) == 0:
             return
+        if librarytools.checkCompleteAddon(params):
+            params = librarytools.completeAddonParams(params)
         keepFolderId = self.subFolderIdsList[-1]
         insertSeq = 'INSERT INTO astro_actions (%s, keepFolderId) VALUES (%s, %s)' % (
             ', '.join(params.keys()),
@@ -76,6 +79,7 @@ class LibraryModal(pyxbmct.AddonDialogWindow):
         self.prepareItems(keepFolderId)
 
     def onClickList(self, position):
+        global sectionId
         item = self.items[position]
         # Check if list element is to go back or add new element
         if item[2] == getLocalizedString(32005):
@@ -96,6 +100,7 @@ class LibraryModal(pyxbmct.AddonDialogWindow):
                 sectionId = self.backIdHistory[-1]
                 if int(sectionId) != 0:
                     self.backIdHistory.pop(-1)
+                self.subFolderIdsList.append(sectionId)
                 self.prepareItems(sectionId)
         else:
             if not bool(item[-2]):  # Skip if item is not an onClick item (action)
@@ -131,7 +136,7 @@ class LibraryModal(pyxbmct.AddonDialogWindow):
                 self.image.setImage(ICON)
             if listPosition > 0:
                 thumb = self.items[listPosition][3]
-                if not thumb or thumb == 'ICON' or not thumb.startswith('http'):
+                if not thumb or thumb == 'ICON' and (not thumb.startswith('http') and not thumb.startswith('special://')):
                     thumb = ICON
                 self.image.setImage(thumb)
 

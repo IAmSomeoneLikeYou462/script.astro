@@ -38,11 +38,14 @@ translatePath = xbmc.translatePath if not PY3 else xbmcvfs.translatePath
 LOGNOTICE = xbmc.LOGINFO if PY3 else xbmc.LOGNOTICE
 ADDON = xbmcaddon.Addon()
 HOME = translatePath(ADDON.getAddonInfo('Path'))
+SP_HOME = 'special://home/'
+ADDONS_DIR_NAME = SP_HOME + 'addons/'
 ICON = ADDON.getAddonInfo('icon')
 FANART = ADDON.getAddonInfo('fanart')
 PROFILE = translatePath(ADDON.getAddonInfo('Profile'))
-TITLE = '{NAME} - {VERSION}'.format(
-        NAME=ADDON.getAddonInfo('name'), VERSION=ADDON.getAddonInfo('version'))
+NAME = ADDON.getAddonInfo('name')
+VERSION = ADDON.getAddonInfo('version')
+TITLE = f'{NAME} - {VERSION}'
 if not os.path.exists(PROFILE):
     os.makedirs(PROFILE)
 DBFILE = translatePath(os.path.join(PROFILE, 'astro.db'))
@@ -50,6 +53,8 @@ IMAGES_URL = {
     "ICON": "https://p4.wallpaperbetter.com/wallpaper/235/979/748/the-sky-stars-the-universe-spiral-wallpaper-preview.jpg",
     "FANART": "https://images.wallpapersden.com/image/download/watching-the-universe_a2dnbmeUmZqaraWkpJRmbmdlrWZlbWU.jpg"
 }
+ADDONS_DIR = os.path.join(translatePath(SP_HOME), 'addons')
+
 
 def build_url(item):
     return __base_url + '?' + item.tourl()
@@ -112,10 +117,11 @@ def set_context_commands(item):
     """    Función para generar los menus contextuales.    """
     CONTEXT_COMMANDS = {'folders': {'[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32008)): 'renameSQL',
                                     '[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32030)): 'deleteSQL',
-                                    '[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32032)): 'moveElement'},
+                                    '[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32032)): 'moveElement',
+                                    '[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32037)): 'changeIcon'},
                         'actions': {'[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32009)): 'renameSQL',
                                     '[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32031)): 'deleteSQL',
-                                    '[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32033)): 'moveElement'},}
+                                    '[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32033)): 'moveElement'}, }
     context_commands = []
     # Rename Folder
     if item.path is None or not item.path:
@@ -128,7 +134,7 @@ def set_context_commands(item):
                                             columnName='name',
                                             sqlTable='astro_folders'
                                         ))))
-        
+
     else:
         for name, action in CONTEXT_COMMANDS['actions'].items():
             context_commands.append((name,
@@ -244,4 +250,4 @@ def getKodiColors():
 
 
 def prepareThumbnail(thumbnail):
-    return thumbnail if thumbnail.startswith('http') else ICON
+    return thumbnail if thumbnail.startswith('http') or thumbnail.startswith('special://') else ICON

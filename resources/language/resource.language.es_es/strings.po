@@ -38,6 +38,10 @@ msgctxt "#32004"
 msgid "Differentiate folders from actions in window view"
 msgstr "Diferenciar las carpetas de las acciones en la vista ventana"
 
+msgctxt "#32036"
+msgid "Sort items in alphabetical order"
+msgstr "Ordenar items por orden alfabético"
+
 msgctxt "#32012"
 msgid "Astro Remote Settings"
 msgstr "Astro Ajustes Remoto"
@@ -128,6 +132,10 @@ msgstr "Mover Carpeta"
 msgctxt "#32033"
 msgid "Move Action"
 msgstr "Mover Acción"
+
+msgctxt "#32037"
+msgid "Change Icon"
+msgstr "Cambiar icono"
 
 
 #  Customize Window

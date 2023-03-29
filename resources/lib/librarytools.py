@@ -64,10 +64,10 @@ def getCurrentParams():
     filename = xbmc.getInfoLabel('%sListItem.FilenameAndPath' % prefix)
     thumb = xbmc.getInfoLabel('%sListItem.Thumb' % prefix)
     icon = xbmc.getInfoLabel('%sListItem.ActualIcon' % prefix)
-    #thumb   = xbmc.getInfoLabel('%sListItem.Art(thumb)' % prefix)
+    # thumb   = xbmc.getInfoLabel('%sListItem.Art(thumb)' % prefix)
     playable = xbmc.getInfoLabel(
         '%sListItem.Property(IsPlayable)' % prefix).lower() == 'true'
-    #fanart  = xbmc.getInfoLabel('%sListItem.Property(Fanart_Image)' % prefix)
+    # fanart  = xbmc.getInfoLabel('%sListItem.Property(Fanart_Image)' % prefix)
     fanart = xbmc.getInfoLabel('%sListItem.Art(fanart)' % prefix)
     isFolder = xbmc.getCondVisibility('%sListItem.IsFolder' % prefix) == 1
     hasVideo = xbmc.getCondVisibility('Player.HasVideo') == 1
@@ -134,3 +134,33 @@ def getCurrentParams():
     params['picture'] = picture
 
     return params
+
+
+def completeAddonParams(params):
+    from xml.etree import ElementTree
+    path = params.get('path')
+    if path.endswith('/'):
+        path = path[:-1]
+    pluginDirName = path.split('/')[-1]
+    pluginDir = os.path.join(ADDONS_DIR, pluginDirName)
+    if not os.path.exists(pluginDir):
+        return params
+    addonXml = os.path.join(translatePath(pluginDir), 'addon.xml')
+    if not os.path.isfile(addonXml):
+        return params
+    data = open(addonXml, 'rb').read()
+    dataXml = ElementTree.fromstring(data)
+    metadata = list(filter(
+        lambda extension: extension.attrib['point'] == "xbmc.addon.metadata", dataXml.findall('extension')))[0]
+    assets = metadata.find('assets')
+    assetsTag = ['icon', 'fanart']
+    for tag in assetsTag:
+        image = f"{ADDONS_DIR_NAME}{pluginDirName}/{assets.find(tag).text}"
+        if tag == 'icon':
+            tag = 'thumb'
+        params[tag] = image
+    return params
+
+
+def checkCompleteAddon(params): return params.get(
+    'folder').startswith('addons://')

@@ -18,26 +18,33 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, see <http://www.gnu.org/licenses/>.
 # ----------------------------------------------------------------------
-import sys
 from item import Item
 from tools import *
 import databasetools
 import servicetools
+import plugintools
 
 
 def menu(item):
     itemlist = list()
     if not item.sectionId:
         item.sectionId = 0
+    folders = databasetools.executeSQL(
+        'SELECT * FROM astro_folders WHERE subFolderId == {}'.format(item.sectionId))
+    actions = databasetools.executeSQL(
+        'SELECT * FROM astro_actions WHERE keepFolderId == {}'.format(item.sectionId))
+    if get_setting('sort_items_alphabetically'):
+        folders = sorted(folders, key=lambda item: item[2])
+        actions = sorted(actions, key=lambda act: act[1])
     if get_setting('dev_mode') and bool(item.mainmenu):
         itemlist.append(item.clone(
-                        title='[COLOR orange]Astro[/COLOR] - %s' % (getLocalizedString(32001)),
+                        title='[COLOR orange]Astro[/COLOR] - %s' % (
+                            getLocalizedString(32001)),
                         thumbnail=ICON,
                         fanart=FANART,
                         action='open_developer_modal'
                         ))
-    for id, sectionId, name, thumbnail, subFolderId, onClick, backFolderId in sorted(databasetools.executeSQL(
-            'SELECT * FROM astro_folders WHERE subFolderId == {}'.format(item.sectionId)), key=lambda item: item[2]):
+    for id, sectionId, name, thumbnail, subFolderId, onClick, backFolderId in folders:
         item.mainmenu = False
         itemlist.append(item.clone(
                         id=id,
@@ -48,8 +55,7 @@ def menu(item):
                         subFolderId=subFolderId,
                         action='menu'
                         ))
-    for action in sorted(databasetools.executeSQL(
-            'SELECT * FROM astro_actions WHERE keepFolderId == {}'.format(item.sectionId)), key= lambda act: act[1]):
+    for action in actions:
         id, label, folder, path, filename, thumbnail, \
             icon, fanart, window, isplayable, isfolder, \
             file, isstream, description, hasVideo, picture, onClick, keepFolderId = action
@@ -80,8 +86,9 @@ def run_customize_modal(item):
     window.doModal()
     del window
 
+
 def set_admin_password(item):
-    return servicetools.set_admin_password()
+    return plugintools.set_admin_password()
 
 
 def runPlugin(item):
@@ -89,35 +96,21 @@ def runPlugin(item):
     xbmc.executebuiltin(
         'ActivateWindow(10025, "%s")' % (item.path))
 
+
 def moveElement(item):
-    foldersSQL = databasetools.executeSQL('SELECT id, sectionID, name FROM astro_folders')
-    folderNames = [folder[2] for folder in foldersSQL]
-    newFolderId = xbmcgui.Dialog().select(TITLE, folderNames)
-    if newFolderId != -1:
-        columnName = 'subFolderId' if item.sqlTable == 'astro_folders' else 'keepFolderId'
-        sqlSeq = "UPDATE {} SET {} = '{}' WHERE id = {};".format(
-                item.sqlTable, columnName, foldersSQL[newFolderId][1], item.id)
-        databasetools.commitSQL(sqlSeq)
-    itemlist_refresh()
+    return plugintools.moveElement(item)
 
 
 def renameSQL(item):
-    name = xbmcgui.Dialog().input(TITLE, item.title, xbmcgui.INPUT_ALPHANUM)
-    if name:
-        sqlSeq = "UPDATE {} SET {} = '{}' WHERE id = {};".format(
-            item.sqlTable, item.columnName, name, item.id)
-        databasetools.commitSQL(sqlSeq)
-    itemlist_refresh()
+    return plugintools.renameSQL(item)
 
 
 def deleteSQL(item):
-    localizedString = 32034 if item.sqlTable == 'astro_folders' else 32035
-    name = xbmcgui.Dialog().yesno(TITLE, getLocalizedString(localizedString) % item.title)
-    if name:
-        sqlSeq = "DELETE FROM {} WHERE id = {};".format(
-            item.sqlTable, item.id)
-        databasetools.commitSQL(sqlSeq)
-    itemlist_refresh()
+    return plugintools.deleteSQL(item)
+
+
+def changeIcon(item):
+    return plugintools.changeIcon(item)
 
 
 def run(item):
@@ -144,4 +137,3 @@ if __name__ == '__main__':
     else:
         item = Item(action='menu', mainmenu=True)
     run(item)
-

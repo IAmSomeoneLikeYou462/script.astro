@@ -41,6 +41,11 @@
 						<heading>32017</heading>
 					</control>
 				</setting>
+				<setting id="sort_items_alphabetically" type="boolean" label="32036" help="">
+					<level>0</level>
+					<default>true</default>
+					<control type="toggle"/>
+				</setting>
 			</group>
 			<group id="3" label="32012">
 				<visible>false</visible>
