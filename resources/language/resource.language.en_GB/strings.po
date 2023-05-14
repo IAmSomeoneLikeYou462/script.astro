@@ -64,6 +64,14 @@ msgctxt "#32006"
 msgid "[COLOR orange]..[/COLOR]"
 msgstr ""
 
+msgctxt "#32038"
+msgid "Add"
+msgstr ""
+
+msgctxt "#32039"
+msgid "Close"
+msgstr ""
+
 # Window Developer
 
 msgctxt "#32007"

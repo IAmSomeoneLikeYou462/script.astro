@@ -53,10 +53,10 @@ class LibraryModal(pyxbmct.AddonDialogWindow):
         self.placeControl(self.list, 0, 1, 9, 3)
         self.image = pyxbmct.Image(ICON)
         self.placeControl(self.image, 2, 0, 4, 1)
-        self.addButton = pyxbmct.Button('Add')
+        self.addButton = pyxbmct.Button(getLocalizedString(32038))
         self.placeControl(self.addButton, 6, 0, 1, 1)
         self.connect(self.addButton, self.addSection)
-        self.closeButton = pyxbmct.Button('Close')
+        self.closeButton = pyxbmct.Button(getLocalizedString(32039))
         self.placeControl(self.closeButton, 7, 0, 1, 1)
         self.connect(self.closeButton, self.close)
 
