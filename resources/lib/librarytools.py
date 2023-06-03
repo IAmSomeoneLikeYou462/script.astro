@@ -155,7 +155,9 @@ def completeAddonParams(params):
     assets = metadata.find('assets')
     assetsTag = ['icon', 'fanart']
     for tag in assetsTag:
-        image = f"{ADDONS_DIR_NAME}{pluginDirName}/{assets.find(tag).text}"
+        tagValue = assets.find(tag)
+        if tagValue == None: continue
+        image = f"{ADDONS_DIR_NAME}{pluginDirName}/{tagValue.text}"
         if tag == 'icon':
             tag = 'thumb'
         params[tag] = image
@@ -163,4 +165,4 @@ def completeAddonParams(params):
 
 
 def checkCompleteAddon(params): return params.get(
-    'folder').startswith('addons://')
+    'path').startswith('addons://') or params.get('path').startswith('plugin://')

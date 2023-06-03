@@ -59,6 +59,15 @@ msgstr "[B]Crear Sección en Astro[/B]"
 
 # 32006 has not translation
 
+msgctxt "#32038"
+msgid "Add"
+msgstr "Añadir"
+
+msgctxt "#32039"
+msgid "Close"
+msgstr "Cerrar"
+
+
 #  Window Developer
 
 msgctxt "#32007"
