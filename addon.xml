@@ -21,6 +21,9 @@
 		<summary>A world of possibilities.</summary>
 		<description>A world of possibilities.</description>
 		<disclaimer>A world of possibilities.</disclaimer>
+		<news>
+		- First Release
+		</news>
 		<assets>
 			<icon>icon.png</icon>
 			<fanart>fanart.jpg</fanart>

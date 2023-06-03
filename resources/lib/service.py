@@ -19,7 +19,9 @@
 # along with this program; if not, see <http://www.gnu.org/licenses/>.
 # ----------------------------------------------------------------------
 import servicetools
+from updater import Updater
 
 if __name__ == '__main__':
+    Updater().checkAvailableVersion(silent=True)
     servicetools.updateAstroRemoteConfig()
 

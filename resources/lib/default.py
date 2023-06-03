@@ -129,6 +129,8 @@ def run(item):
 
 
 if __name__ == '__main__':
+    from updater import Updater
+    Updater().checkAvailableVersion(silent=False)
     servicetools.updateAstroRemoteConfig()
     if not databasetools.checkFileExists():
         databasetools.initializeDatabaseFile()
