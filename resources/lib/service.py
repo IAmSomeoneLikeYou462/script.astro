@@ -20,8 +20,16 @@
 # ----------------------------------------------------------------------
 import servicetools
 from updater import Updater
+from tools import logger
 
 if __name__ == '__main__':
-    Updater().checkAvailableVersion(silent=True)
-    servicetools.updateAstroRemoteConfig()
-
+    try:
+        Updater().checkAvailableVersion(silent=False)
+    except Exception as e:
+        logger("Ha ocurrido un error leyendo la última versión de Astro")
+        logger(f"ERROR: {e}")
+    try:
+        servicetools.updateAstroRemoteConfig()
+    except Exception as e:
+        logger("Ha ocurrido un error leyendo la última versión de los datos")
+        logger(f"ERROR: {e}")
