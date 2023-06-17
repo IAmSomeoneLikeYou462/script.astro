@@ -64,6 +64,7 @@ class LibraryModal(pyxbmct.AddonDialogWindow):
         global params
         if not params or len(params) == 0:
             return
+        params = librarytools.checkItemLibStructure(params)
         if librarytools.checkCompleteAddon(params):
             params = librarytools.completeAddonParams(params)
         keepFolderId = self.subFolderIdsList[-1]
