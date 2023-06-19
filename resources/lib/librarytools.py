@@ -166,3 +166,11 @@ def completeAddonParams(params):
 
 def checkCompleteAddon(params): return params.get(
     'path').startswith('addons://') or params.get('path').startswith('plugin://')
+
+
+def checkItemLibStructure(params): 
+    from item import Item
+    decoded_params = Item().fromurl(params.get('path'))
+    if 'thumbnail' in decoded_params:
+        params['thumb'] = decoded_params.thumbnail
+    return params

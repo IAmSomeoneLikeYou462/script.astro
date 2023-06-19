@@ -25,6 +25,8 @@ import time
 import json
 import glob
 import hashlib
+from xml.etree import ElementTree
+from urllib import request
 
 import xbmc
 import xbmcaddon
@@ -54,6 +56,7 @@ IMAGES_URL = {
     "FANART": "https://images.wallpapersden.com/image/download/watching-the-universe_a2dnbmeUmZqaraWkpJRmbmdlrWZlbWU.jpg"
 }
 ADDONS_DIR = os.path.join(translatePath(SP_HOME), 'addons')
+PACKAGES_DIR = os.path.join(translatePath(ADDONS_DIR), 'packages')
 
 
 def build_url(item):
@@ -238,8 +241,6 @@ def remove_format(string):
 
 
 def getKodiColors():
-    from xml.etree import ElementTree
-    from urllib import request
     req = request.Request(
         'https://raw.githubusercontent.com/xbmc/xbmc/Matrix/system/colors.xml')
     response = request.urlopen(req)
@@ -251,3 +252,36 @@ def getKodiColors():
 
 def prepareThumbnail(thumbnail):
     return thumbnail if thumbnail.startswith('http') or thumbnail.startswith('special://') else ICON
+
+
+class DialogProgress(object):
+    def __init__(self, header, silent=False, messages={}) -> None:
+        self.dialog = xbmcgui.DialogProgress() if not silent else xbmcgui.DialogProgressBG()
+        self.dialog.create(header, self.formatMessages(messages))
+        self.canceled = False
+        self.checkCanceled()
+        if self.canceled:
+            self.close()
+
+    def checkCanceled(self):
+        if isinstance(self.dialog, xbmcgui.DialogProgress):
+            self.canceled = self.dialog.iscanceled()
+        elif isinstance(self.dialog, xbmcgui.DialogProgressBG):
+            self.canceled = self.dialog.isFinished()
+
+    def update(self, percent, messages={}):
+        self.dialog.update(percent,
+                           self.formatMessages(messages))
+
+    def formatMessages(self, messages):
+        return "\n".join([message for key, message in messages.items()
+                          if key.startswith('line')])
+
+    def downloadPercentage(self, block_num, block_size, total_size, messages={}):
+        percent = (block_num * block_size * 100) / total_size
+        self.update(int(percent), messages)
+        if percent > total_size:
+            self.close()
+
+    def close(self):
+        self.dialog.close()

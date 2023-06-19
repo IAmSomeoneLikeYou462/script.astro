@@ -129,7 +129,11 @@ def run(item):
 
 
 if __name__ == '__main__':
-    servicetools.updateAstroRemoteConfig()
+    try:
+        servicetools.updateAstroRemoteConfig()
+    except Exception as e:
+        logger("Ha ocurrido un error leyendo la última versión de los datos")
+        logger(f"ERROR: {e}")
     if not databasetools.checkFileExists():
         databasetools.initializeDatabaseFile()
     if sys.argv[2]:
