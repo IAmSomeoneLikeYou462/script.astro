@@ -24,6 +24,7 @@ jobs:
         run: |
           git config user.name ${{ secrets.GIT_USER_NAME }}
           git config user.email ${{ secrets.GIT_USER_EMAIL }}
+          git pull origin main
           git add .
           git commit -m ":newspaper: Update Astro Changelog"
           git push
