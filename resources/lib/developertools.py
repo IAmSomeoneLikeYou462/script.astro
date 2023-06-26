@@ -73,6 +73,9 @@ def convertJsonToDB(astroRemoteLink=None, jdata=None, override=False):
 
     folders = jdata['data'][0]['astro_folders']
     actions = jdata['data'][0]['astro_actions']
+    if len(folders) > 0 and len(actions) > 0:
+        databasetools.commitSQL("DELETE FROM astro_actions")
+        databasetools.commitSQL("DELETE FROM astro_folders")
     for action in actions:
         insertSeqAct = 'INSERT OR REPLACE INTO astro_actions (%s) VALUES (%s)' % (
             ', '.join(actions[0].keys()),
