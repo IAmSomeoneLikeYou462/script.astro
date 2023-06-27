@@ -137,6 +137,7 @@ if __name__ == '__main__':
         logger(f"ERROR: {e}")
     if not databasetools.checkFileExists():
         databasetools.initialiseDatabaseFile()
+
     try:
         servicetools.updateAstroRemoteConfig()
     except Exception as e:

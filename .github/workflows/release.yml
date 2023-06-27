@@ -1,0 +1,50 @@
+name: Release Astro
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Release Astro
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out ${{ github.sha }} from repository ${{ github.repository }}
+        uses: actions/checkout@v2
+
+      - name: Get changelog
+        id: get-changelog
+        run: |
+          changelog=$(python .github/scripts/generate-changelog.py)
+          changelog="${changelog//'%'/'%25'}"
+          changelog="${changelog//$'\n'/'%0A'}"
+          changelog="${changelog//$'\r'/'%0D'}"
+          echo ::set-output name=body::$changelog
+
+      - name: Push Astro Changelog to GitHub
+        run: |
+          git config user.name ${{ secrets.GIT_USER_NAME }}
+          git config user.email ${{ secrets.GIT_USER_EMAIL }}
+          git pull origin main
+          git add .
+          git commit -m ":newspaper: Update Astro Changelog"
+          git push
+
+      - name: Generate distribution zips
+        id: release-zip
+        run: |
+          release=$(python .github/scripts/release.py)
+          release="${release//'%'/'%25'}"
+          release="${release//$'\n'/'%0A'}"
+          release="${release//$'\r'/'%0D'}"
+          echo ::set-output name=version::$release
+
+      - name: Create Release on Github
+        uses: softprops/action-gh-release@v1
+        with:
+          name: "Astro - v${{ steps.release-zip.outputs.version }}"
+          tag_name: ${{ steps.release-zip.outputs.version }}
+          body: ${{ steps.get-changelog.outputs.body }}
+          draft: false
+          prerelease: false
+          files: "dist/*.zip"
+          token: ${{ secrets.GH_TOKEN }}
