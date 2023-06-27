@@ -85,7 +85,7 @@ def createDatabaseFile():
     conn.close()
 
 
-def initializeDatabaseFile():
+def initialiseDatabaseFile():
     createDatabaseFile()
     conn = sqlite3.connect(DBFILE)
     c = conn.cursor()

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="script.astro"
 	name="Astro"
-	version="1.0.0"
+	version="1.0.2"
 	provider-name="Someone Like You">
 	<requires></requires>
 	<extension point="xbmc.python.pluginsource" library="resources/lib/default.py">
@@ -18,11 +18,14 @@
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<platform>all</platform>
+        <source>https://github.com/IAmSomeoneLikeYou462/script.astro</source>
 		<summary>A world of possibilities.</summary>
 		<description>A world of possibilities.</description>
 		<disclaimer>A world of possibilities.</disclaimer>
 		<news>
-		- First Release
+		- Version 1.0.2
+		- fix: Added the possibility of remove sections in Astro Remote Config
+		- fix: Fix table not found when db is not created and there is a astro remote config
 		</news>
 		<assets>
 			<icon>icon.png</icon>

@@ -27,7 +27,7 @@ from modals.developermodal import DeveloperModal
 
 def main():
     if not databasetools.checkFileExists():
-        databasetools.initializeDatabaseFile()
+        databasetools.initialiseDatabaseFile()
     if get_setting('dev_mode'):
         window = DeveloperModal('{} - {}'.format(TITLE, 'Developer Mode'))
         window.doModal()
